@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <input type="text" id="input">
+        <button onclick="add()">Add</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        var todolist = [];
+
+        // Load from localStorage
+        if (localStorage.getItem("todo")) {
+            todolist = JSON.parse(localStorage.getItem("todo"));
+            render();
+        }
+
+        function add() {
+            var todo = document.getElementById("input").value.trim();
+            if (todo === "") return;
+
+            todolist.push(todo);
+            localStorage.setItem("todo", JSON.stringify(todolist));
+            document.getElementById("input").value = "";
+            genui();
+        }
+
+        function genui() {
+            document.getElementById("list").innerHTML = "";
+
+            todolist.forEach(function (ele, index) {
+                var li = document.createElement("li");
+                li.innerText = ele;
+
+                var btn = document.createElement("button");
+                btn.innerText = "X";
+
+                btn.addEventListener("click", function () {
+                    deleteItem(index);
+                });
+
+                li.appendChild(btn);
+                document.getElementById("list").appendChild(li);
+            });
+        }
+
+        function deleteItem(index) {
+            todolist.splice(index, 1);
+            localStorage.setItem("todo", JSON.stringify(todolist));
+            render();
+        }
+    </script>
+
+</body>
+
+</html>
