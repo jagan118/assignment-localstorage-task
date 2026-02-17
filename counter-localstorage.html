@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        
+        button {
+            width: 80px;
+            color: rgb(236, 214, 214);
+            background-color: rgb(42, 199, 223);
+            height: 45px;
+            padding: 5px;
+            width: 100px;
+            border-radius: 20px;
+        }
+
+        .counter {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="counter">
+        <h1 id="count"></h1>
+        <div class="btn-container">
+            <button onclick="increament()">Increment</button>
+            <button onclick="reset()">Reset</button>
+            <button onclick="decrement()">Decrement</button>
+        </div>
+    </div>
+</body>
+<script>
+    var count = 0;
+    if (window.localStorage.getItem("count")) {
+        scount =window.localStorage.getItem("count");
+        count = scount;
+    }
+    document.getElementById("count").innerText=count;
+    var x = document.getElementById("count");
+    function increament() {
+        count++;
+        x.innerText = count;
+        window.localStorage.setItem("count", JSON.stringify(count))
+    }
+    function decrement() {
+        count--;
+        x.innerText = count;
+        window.localStorage.setItem("count", JSON.stringify(count))
+    }
+    function reset() {
+        count = 0;
+        x.innerText = count;
+        window.localStorage.setItem("count", JSON.stringify(count))
+    }
+</script>
+
+</html>
