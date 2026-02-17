@@ -41,7 +41,7 @@
         // Load from localStorage
         if (localStorage.getItem("todo")) {
             todolist = JSON.parse(localStorage.getItem("todo"));
-            render();
+            genui();
         }
 
         function add() {
@@ -83,3 +83,4 @@
 </body>
 
 </html>
+
